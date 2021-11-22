@@ -3,6 +3,7 @@
 
 /**
  * Validation rules.
+ * @private
  */
 
 const rules = {
@@ -18,15 +19,17 @@ const rules = {
 /* eslint-enable no-control-regex */
 
 /**
- * Export validation functions.
+ * Minimal, RFC 6749, compliant unicode validator.
+ * @see https://datatracker.ietf.org/doc/html/rfc6749#appendix-A
  */
-
-module.exports = {
+const isUnicode = {
 
   /**
    * Validate if a value matches a unicode character.
    *
    * @see https://tools.ietf.org/html/rfc6749#appendix-A
+   * @value {string} the value to be validated
+   * @return {boolean} true, if valid, otherwise false
    */
 
   nchar: function(value) {
@@ -37,6 +40,8 @@ module.exports = {
    * Validate if a value matches a unicode character, including exclamation marks.
    *
    * @see https://tools.ietf.org/html/rfc6749#appendix-A
+   * @value {string} the value to be validated
+   * @return {boolean} true, if valid, otherwise false
    */
 
   nqchar: function(value) {
@@ -47,6 +52,8 @@ module.exports = {
    * Validate if a value matches a unicode character, including exclamation marks and spaces.
    *
    * @see https://tools.ietf.org/html/rfc6749#appendix-A
+   * @value {string} the value to be validated
+   * @return {boolean} true, if valid, otherwise false
    */
 
   nqschar: function(value) {
@@ -58,6 +65,8 @@ module.exports = {
    * return and linefeed characters.
    *
    * @see https://tools.ietf.org/html/rfc6749#appendix-A
+   * @value {string} the value to be validated
+   * @return {boolean} true, if valid, otherwise false
    */
 
   uchar: function(value) {
@@ -73,6 +82,8 @@ module.exports = {
    * Validate if a value matches generic URIs.
    *
    * @see http://tools.ietf.org/html/rfc3986#section-3
+   * @value {string} the value to be validated
+   * @return {boolean} true, if valid, otherwise false
    */
   uri: function(value) {
     return rules.URI.test(value);
@@ -82,9 +93,16 @@ module.exports = {
    * Validate if a value matches against the printable set of unicode characters.
    *
    * @see https://tools.ietf.org/html/rfc6749#appendix-A
+   * @value {string} the value to be validated
+   * @return {boolean} true, if valid, otherwise false
    */
 
   vschar: function(value) {
     return rules.VSCHAR.test(value);
   }
 };
+
+/**
+ * Export validation functions.
+ */
+module.exports = isUnicode;

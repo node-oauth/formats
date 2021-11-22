@@ -1,0 +1,4 @@
+test/
+.github
+.nyc_output
+coverage
