@@ -3,6 +3,7 @@
 
 /**
  * Validation rules.
+ * @private
  */
 
 const rules = {
@@ -18,10 +19,10 @@ const rules = {
 /* eslint-enable no-control-regex */
 
 /**
- * Export validation functions.
+ * Minimal, RFC 6749, compliant unicode validator.
+ * @see https://datatracker.ietf.org/doc/html/rfc6749#appendix-A
  */
-
-module.exports = {
+const isUnicode = {
 
   /**
    * Validate if a value matches a unicode character.
@@ -100,3 +101,8 @@ module.exports = {
     return rules.VSCHAR.test(value);
   }
 };
+
+/**
+ * Export validation functions.
+ */
+module.exports = isUnicode;
