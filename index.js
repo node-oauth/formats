@@ -22,7 +22,7 @@ const rules = {
  * Minimal, RFC 6749, compliant unicode validator.
  * @see https://datatracker.ietf.org/doc/html/rfc6749#appendix-A
  */
-const isUnicode = {
+const isFormat = {
 
   /**
    * Validate if a value matches a unicode character.
@@ -105,4 +105,4 @@ const isUnicode = {
 /**
  * Export validation functions.
  */
-module.exports = isUnicode;
+module.exports = isFormat;
