@@ -11,7 +11,7 @@ requirements.
 ## Install
 
 ```bash
-$ npm install @node-oauth/is-unicode
+$ npm install @node-oauth/formats
 ```
 
 ## Usage
