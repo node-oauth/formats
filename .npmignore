@@ -2,3 +2,5 @@ test/
 .github
 .nyc_output
 coverage
+.eslintrc
+.mocharc.yml
