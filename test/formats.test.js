@@ -1,4 +1,4 @@
-const isUnicode = require('../index');
+const isFormat = require('../index');
 require('chai').should();
 
 function runRanges (ranges, fn, expected) {
@@ -29,7 +29,7 @@ describe('Validator', function () {
         [97, 122] // a-z
       ];
 
-      runRanges(validRanges, isUnicode.nchar, true);
+      runRanges(validRanges, isFormat.nchar, true);
 
       const invalidRanges = [
         [0, 44],
@@ -40,7 +40,7 @@ describe('Validator', function () {
         [123, 1023]
       ];
 
-      runRanges(invalidRanges, isUnicode.nchar, false);
+      runRanges(invalidRanges, isFormat.nchar, false);
     });
  
     it('validates if a value matches a unicode character, including exclamation marks (nqchar)', function () {
@@ -50,7 +50,7 @@ describe('Validator', function () {
         [93, 126] // \u005D-\u007E
       ];
 
-      runRanges(validRanges, isUnicode.nqchar, true);
+      runRanges(validRanges, isFormat.nqchar, true);
 
       const invalidRanges = [
         [0, 32],
@@ -59,7 +59,7 @@ describe('Validator', function () {
         [127, 1023]
       ];
 
-      runRanges(invalidRanges, isUnicode.nqchar, false);
+      runRanges(invalidRanges, isFormat.nqchar, false);
     });
 
     it('validates if a value matches a unicode character, including exclamation marks and spaces (nqschar)', function () {
@@ -69,7 +69,7 @@ describe('Validator', function () {
         [93, 126] // \u005D-\u007E
       ];
 
-      runRanges(validRanges, isUnicode.nqschar, true);
+      runRanges(validRanges, isFormat.nqschar, true);
 
       const invalidRanges = [
         [0, 31],
@@ -78,7 +78,7 @@ describe('Validator', function () {
         [127, 1023]
       ];
 
-      runRanges(invalidRanges, isUnicode.nqschar, false);
+      runRanges(invalidRanges, isFormat.nqschar, false);
     });
   
     it('validates if a value matches a unicode character excluding the carriage return and linefeed characters (uchar)', function () {
@@ -91,7 +91,7 @@ describe('Validator', function () {
         [65536, 1114111] // \u10000-\u10FFFF
       ];
 
-      runRanges(validRanges, isUnicode.uchar, true);
+      runRanges(validRanges, isFormat.uchar, true);
 
       const invalidRanges = [
         [0, 8],
@@ -101,18 +101,18 @@ describe('Validator', function () {
         [65534, 65535]
       ];
 
-      runRanges(invalidRanges, isUnicode.uchar, false);
+      runRanges(invalidRanges, isFormat.uchar, false);
     });
 
     it('validates if a value matches generic URIs (uri)', function () {
       ['aa:', 'http:', 'https:'].forEach(function (uri) {
-        isUnicode.uri(uri).should.equal(true);
-        isUnicode.uri(uri.toUpperCase()).should.equal(true);
+        isFormat.uri(uri).should.equal(true);
+        isFormat.uri(uri.toUpperCase()).should.equal(true);
       });
 
       ['a', 'a:', 'http'].forEach(function (uri) {
-        isUnicode.uri(uri).should.equal(false);
-        isUnicode.uri(uri.toUpperCase()).should.equal(false);
+        isFormat.uri(uri).should.equal(false);
+        isFormat.uri(uri.toUpperCase()).should.equal(false);
       });
     });
 
@@ -121,14 +121,14 @@ describe('Validator', function () {
         [32, 126] // \u0020-\u007E
       ];
 
-      runRanges(validRanges, isUnicode.vschar, true);
+      runRanges(validRanges, isFormat.vschar, true);
 
       const invalidRanges = [
         [0, 31],
         [127, 1023]
       ];
 
-      runRanges(invalidRanges, isUnicode.vschar, false);
+      runRanges(invalidRanges, isFormat.vschar, false);
     });
   
   });

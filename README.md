@@ -1,7 +1,7 @@
-# @node-oauth/is-unicode
+# @node-oauth/formats
 
 Minimal, [RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749#appendix-A)
-compliant unicode validator.
+compliant ascii and unicode validator.
 
 This package is intended to be used with a OAuth2 server, like 
 [@node-oauth/node-oauth2-server](https://github.com/node-oauth/node-oauth2-server)
@@ -17,10 +17,10 @@ $ npm install @node-oauth/is-unicode
 ## Usage
 
 ```js
-const isUnicode from '@node-oauth/is-unicode'
+const isFormat = require('@node-oauth/formats')
 
-isUnicode.nchar('Hello, World!') // false
-isUnicode.nqchar('Hello, World!') // true
+isFormat.nchar('Hello, World!') // false
+isFormat.nqchar('Hello, World!') // true
 ```
 
 For detailed usage see the [API docs](./API.md)
