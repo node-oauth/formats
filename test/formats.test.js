@@ -1,5 +1,6 @@
 const isFormat = require('../index');
-const {should} = require('chai').should();
+const chai = require('chai');
+const should = chai.should();
 
 function runRanges (ranges, fn, expected) {
   ranges.forEach(function (range) {
@@ -20,7 +21,7 @@ const ensureValidFormat = (fn) => {
   const invalid = [undefined, 123, {}, [], true, false, () => {}, Symbol('test')];
   invalid.forEach(value => {
     try {
-      fn(null);
+      fn(value);
       should.fail();
     } catch (e) {
       e
