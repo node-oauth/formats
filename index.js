@@ -19,6 +19,18 @@ const rules = {
 /* eslint-enable no-control-regex */
 
 /**
+ * Ensure the value is a string.
+ * @param s {any} the value to be checked
+ * @throws {TypeError} if the value is not a string
+ */
+const ensureString = (s) => {
+  const t = typeof s;
+  if (t !== 'string') {
+    throw new TypeError('Value must be a string');
+  }
+};
+
+/**
  * Minimal, RFC 6749, compliant unicode validator.
  * @see https://datatracker.ietf.org/doc/html/rfc6749#appendix-A
  */
@@ -33,6 +45,7 @@ const isFormat = {
    */
 
   nchar: function(value) {
+    ensureString(value);
     return rules.NCHAR.test(value);
   },
 
@@ -45,6 +58,7 @@ const isFormat = {
    */
 
   nqchar: function(value) {
+    ensureString(value);
     return rules.NQCHAR.test(value);
   },
 
@@ -57,6 +71,7 @@ const isFormat = {
    */
 
   nqschar: function(value) {
+    ensureString(value);
     return rules.NQSCHAR.test(value);
   },
 
@@ -70,6 +85,7 @@ const isFormat = {
    */
 
   uchar: function(value) {
+    ensureString(value);
     // manually test \u10000-\u10FFFF
     if (rules.UNICODECHARNOCRLF.test(value)) {
       return true;
@@ -86,6 +102,7 @@ const isFormat = {
    * @return {boolean} true, if valid, otherwise false
    */
   uri: function(value) {
+    ensureString(value);
     return rules.URI.test(value);
   },
 
@@ -98,6 +115,7 @@ const isFormat = {
    */
 
   vschar: function(value) {
+    ensureString(value);
     return rules.VSCHAR.test(value);
   }
 };

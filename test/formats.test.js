@@ -1,5 +1,5 @@
 const isFormat = require('../index');
-require('chai').should();
+const {should} = require('chai').should();
 
 function runRanges (ranges, fn, expected) {
   ranges.forEach(function (range) {
@@ -16,11 +16,26 @@ function runRanges (ranges, fn, expected) {
   });
 }
 
+const ensureValidFormat = (fn) => {
+  const invalid = [undefined, 123, {}, [], true, false, () => {}, Symbol('test')];
+  invalid.forEach(value => {
+    try {
+      fn(null);
+      should.fail();
+    } catch (e) {
+      e
+        .should.be.instanceOf(TypeError)
+        .and.have.property('message', 'Value must be a string');
+    }
+  });
+};
+
 describe('Validator', function () {
  
   describe('is', function () {
- 
     it('validates if a value matches a unicode character (nchar)', function () {
+      ensureValidFormat(isFormat.nchar);
+
       const validRanges = [
         [45, 46], // \u002D \u002E
         [48, 57], // 0-9
@@ -44,6 +59,8 @@ describe('Validator', function () {
     });
  
     it('validates if a value matches a unicode character, including exclamation marks (nqchar)', function () {
+      ensureValidFormat(isFormat.nqchar);
+
       const validRanges = [
         [33, 33], // \u0021
         [35, 91], // \u0023-\u005B
@@ -63,6 +80,8 @@ describe('Validator', function () {
     });
 
     it('validates if a value matches a unicode character, including exclamation marks and spaces (nqschar)', function () {
+      ensureValidFormat(isFormat.nqschar);
+
       const validRanges = [
         [32, 33], // \u0020-\u0021
         [35, 91], // \u0023-\u005B
@@ -82,6 +101,8 @@ describe('Validator', function () {
     });
   
     it('validates if a value matches a unicode character excluding the carriage return and linefeed characters (uchar)', function () {
+      ensureValidFormat(isFormat.uchar);
+
       this.timeout(60000);
       const validRanges = [
         [9, 9], // \u0009
@@ -105,6 +126,8 @@ describe('Validator', function () {
     });
 
     it('validates if a value matches generic URIs (uri)', function () {
+      ensureValidFormat(isFormat.uri);
+
       ['aa:', 'http:', 'https:'].forEach(function (uri) {
         isFormat.uri(uri).should.equal(true);
         isFormat.uri(uri.toUpperCase()).should.equal(true);
@@ -117,6 +140,8 @@ describe('Validator', function () {
     });
 
     it('validates if a value matches against the printable set of unicode characters (vschar)', function () {
+      ensureValidFormat(isFormat.vschar);
+
       const validRanges = [
         [32, 126] // \u0020-\u007E
       ];
