@@ -18,7 +18,7 @@ function runRanges (ranges, fn, expected) {
 }
 
 const ensureValidFormat = (fn) => {
-  const invalid = [undefined, 123, {}, [], true, false, () => {}, Symbol('test')];
+  const invalid = [null, undefined, 123, 0x00, Infinity, {}, [], true, false, () => {}, Symbol('test')];
   invalid.forEach(value => {
     try {
       fn(value);
