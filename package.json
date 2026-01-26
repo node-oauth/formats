@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "pretest": "./node_modules/.bin/eslint index.js test",
+    "pretest": "eslint index.js test",
     "test": "mocha test",
     "test:coverage": "NODE_ENV=test nyc --reporter=html --reporter=text --reporter=lcov ./node_modules/.bin/mocha 'test/*'",
     "lint": "npx eslint .",
