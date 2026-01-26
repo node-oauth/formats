@@ -17,7 +17,7 @@ function runRanges (ranges, fn, expected) {
   });
 }
 
-const ensureValidFormat = (fn) => {
+const assertValidFormat = (fn) => {
   const invalid = [null, undefined, 123, 0x00, Infinity, {}, [], true, false, () => {}, Symbol('test')];
   invalid.forEach(value => {
     try {
@@ -35,7 +35,7 @@ describe('Validator', function () {
  
   describe('is', function () {
     it('validates if a value matches a unicode character (nchar)', function () {
-      ensureValidFormat(isFormat.nchar);
+      assertValidFormat(isFormat.nchar);
 
       const validRanges = [
         [45, 46], // \u002D \u002E
@@ -60,7 +60,7 @@ describe('Validator', function () {
     });
  
     it('validates if a value matches a unicode character, including exclamation marks (nqchar)', function () {
-      ensureValidFormat(isFormat.nqchar);
+      assertValidFormat(isFormat.nqchar);
 
       const validRanges = [
         [33, 33], // \u0021
@@ -81,7 +81,7 @@ describe('Validator', function () {
     });
 
     it('validates if a value matches a unicode character, including exclamation marks and spaces (nqschar)', function () {
-      ensureValidFormat(isFormat.nqschar);
+      assertValidFormat(isFormat.nqschar);
 
       const validRanges = [
         [32, 33], // \u0020-\u0021
@@ -102,7 +102,7 @@ describe('Validator', function () {
     });
   
     it('validates if a value matches a unicode character excluding the carriage return and linefeed characters (uchar)', function () {
-      ensureValidFormat(isFormat.uchar);
+      assertValidFormat(isFormat.uchar);
 
       this.timeout(60000);
       const validRanges = [
@@ -127,7 +127,7 @@ describe('Validator', function () {
     });
 
     it('validates if a value matches generic URIs (uri)', function () {
-      ensureValidFormat(isFormat.uri);
+      assertValidFormat(isFormat.uri);
 
       ['aa:', 'http:', 'https:'].forEach(function (uri) {
         isFormat.uri(uri).should.equal(true);
@@ -141,7 +141,7 @@ describe('Validator', function () {
     });
 
     it('validates if a value matches against the printable set of unicode characters (vschar)', function () {
-      ensureValidFormat(isFormat.vschar);
+      assertValidFormat(isFormat.vschar);
 
       const validRanges = [
         [32, 126] // \u0020-\u007E

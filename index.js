@@ -20,10 +20,11 @@ const rules = {
 
 /**
  * Ensure the value is a string.
+ * @private
  * @param s {any} the value to be checked
  * @throws {TypeError} if the value is not a string
  */
-const ensureString = (s) => {
+const assertString = (s) => {
   const t = typeof s;
   if (t !== 'string') {
     throw new TypeError('Value must be a string');
@@ -45,7 +46,7 @@ const isFormat = {
    */
 
   nchar: function(value) {
-    ensureString(value);
+    assertString(value);
     return rules.NCHAR.test(value);
   },
 
@@ -58,7 +59,7 @@ const isFormat = {
    */
 
   nqchar: function(value) {
-    ensureString(value);
+    assertString(value);
     return rules.NQCHAR.test(value);
   },
 
@@ -71,7 +72,7 @@ const isFormat = {
    */
 
   nqschar: function(value) {
-    ensureString(value);
+    assertString(value);
     return rules.NQSCHAR.test(value);
   },
 
@@ -85,7 +86,7 @@ const isFormat = {
    */
 
   uchar: function(value) {
-    ensureString(value);
+    assertString(value);
     // manually test \u10000-\u10FFFF
     if (rules.UNICODECHARNOCRLF.test(value)) {
       return true;
@@ -102,7 +103,7 @@ const isFormat = {
    * @return {boolean} true, if valid, otherwise false
    */
   uri: function(value) {
-    ensureString(value);
+    assertString(value);
     return rules.URI.test(value);
   },
 
@@ -115,7 +116,7 @@ const isFormat = {
    */
 
   vschar: function(value) {
-    ensureString(value);
+    assertString(value);
     return rules.VSCHAR.test(value);
   }
 };
